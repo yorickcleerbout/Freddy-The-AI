@@ -25,6 +25,18 @@
             "description": "✅ Successfully updated <user>'s nickname to: **<nickname>**!"
         }
     },
+    "HELP": {
+        "EMBED": {
+            "title": "Help Menu",
+            "description": "Please choose a category in the dropdown menu.",
+            "no_description": "There is no description for this command.",
+            "category_description": "A list of all the commands categorized under <category>.",
+            "MENU": {
+                "placeholder": "Please select a category...",
+                "description": "Commands from <category> category."
+            }
+        }
+    },
     "ERRORS": {
         "permission_denied": "Permission Denied"
     }

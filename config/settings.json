@@ -1,3 +1,8 @@
 {
-    "embed_color": "Random"
+    "embed_color": "Random",
+    "HELP_MENU_EMOJIS": {
+        "informational": "💡",
+        "utility": "🛠",
+        "schedules": "📆"
+    }
 }
