@@ -1,0 +1,31 @@
+{
+    "BOT_INFO": {
+        "days": "days",
+        "hours": "hours",
+        "minutes": "minutes",
+        "seconds": "seconds",
+        "total_mem": "Total Memory:",
+        "used_mem": "Used Memory:",
+        "free_mem": "Free Memory:",
+        "percent_mem": "Percentage Of Free Memory:",
+        "EMBED": {
+            "title": "Bot Info",
+            "description": "Technical Information about the bot.",
+            "FIELDS": {
+                "server_count": "Server Count",
+                "client_id": "Client ID",
+                "latency": "Latency",
+                "uptime": "Uptime",
+                "memory": "Memory (RAM)"
+            }
+        }
+    },
+    "NICKNAME": {
+        "EMBED": {
+            "description": "✅ Successfully updated <user>'s nickname to: **<nickname>**!"
+        }
+    },
+    "ERRORS": {
+        "permission_denied": "Permission Denied"
+    }
+}
