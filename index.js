@@ -41,7 +41,8 @@ for (const folder of commandFolders) {
 
         if ('data' in command && 'execute' in command) {
 
-            client.commands.set(command.data.name, command);
+            const properties = { folder, ...command };
+            client.commands.set(command.data.name, properties);
             commands.push(command.data.toJSON());
             loaded.push({ cat: filePath.split('\\').slice(-2, -1), cmd: command.data.name, status: true })
         } else {
