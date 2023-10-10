@@ -11,7 +11,8 @@ const client = new Client({
         GatewayIntentBits.Guilds,
         GatewayIntentBits.GuildMessages,
         GatewayIntentBits.MessageContent,
-        GatewayIntentBits.GuildMembers
+        GatewayIntentBits.GuildMembers,
+        GatewayIntentBits.GuildVoiceStates
     ]
 });
 
@@ -58,15 +59,20 @@ for (const folder of commandFolders) {
 const eventsPath = path.join(__dirname, 'events');
 const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
 
+console.log(chalk.bold.blue(`Started loading ${eventFiles.length} events.`));
+
 for (const file of eventFiles) {
     const filePath = path.join(eventsPath, file);
     const event = require(filePath);
+    console.log(chalk.bold.cyan(`Loading '${event.name}' ...`));
     if (event.once) {
         client.once(event.name, (...args) => event.execute(...args));
     } else {
         client.on(event.name, (...args) => event.execute(...args));
     }
+
 }
+console.log(chalk.bold.blue(`Successfully reloaded ${eventFiles.length} events.`));
 
 // REGISTERING COMMANDS TO DISCORD
 const rest = new REST().setToken(process.env.BOT_TOKEN);
@@ -83,6 +89,17 @@ const rest = new REST().setToken(process.env.BOT_TOKEN);
 
         console.log(chalk.bold.blue(`Successfully reloaded ${data.length} application (/) commands.`));
 
+        // PRINT TABLE WITH LOADED AND FAILED COMMANDS
+        var table = new AsciiTable('Commands')
+        table.setHeading('Category', 'Command', 'Status')
+
+        loaded.forEach(obj => {
+            if (obj.status) table.addRow(obj.cat, obj.cmd, chalk.bold.green('Loading Success'))
+            else table.addRow(obj.cat, obj.cmd, chalk.bold.red('Loading Failed'))
+        });
+
+        console.log(table.toString());
+
     } catch (error) {
         console.error(error);
     }
@@ -91,15 +108,3 @@ const rest = new REST().setToken(process.env.BOT_TOKEN);
 
 // LOGIN THE BOT
 client.login(process.env.BOT_TOKEN);
-
-
-// PRINT TABLE WITH LOADED AND FAILED COMMANDS
-var table = new AsciiTable('Commands')
-table.setHeading('Category', 'Command', 'Status')
-
-loaded.forEach(obj => {
-    if (obj.status) table.addRow(obj.cat, obj.cmd, chalk.bold.green('Loading Success'))
-    else table.addRow(obj.cat, obj.cmd, chalk.bold.red('Loading Failed'))
-});
-
-console.log(table.toString())
